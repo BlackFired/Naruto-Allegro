@@ -2,8 +2,7 @@
 #include "inicia.h"
 
 /*Iniciamos el Juego*/
-int main()
-{
+int main(){
     inicia_allegro(640,480); //inicia allegro
     inicia_audio(70,70); //inicia audio
 
@@ -11,14 +10,35 @@ int main()
     clear_to_color(buffer, 0xFFFFFF);
 
     /*Variables*/
+    /*Stancia*/
     BITMAP *stand1;
     BITMAP *vstand1;
+    /*Stancia*/
+
+    /*Caminata*/
     BITMAP *walk1;
     BITMAP *walk2;
     BITMAP *walk3;
+    BITMAP *walk4;
+    BITMAP *walk5;
+    BITMAP *walk6;
     BITMAP *vwalk1;
     BITMAP *vwalk2;
     BITMAP *vwalk3;
+    BITMAP *vwalk4;
+    BITMAP *vwalk5;
+    BITMAP *vwalk6;
+    /*Caminata*/
+
+    /*Agacharse*/
+    BITMAP *Agachado1;
+    BITMAP *Agachado2;
+    BITMAP *Agachado3;
+    BITMAP *vAgachado1;
+    BITMAP *vAgachado2;
+    BITMAP *vAgachado3;
+    /*Agacharse*/
+
     BITMAP *lanzakunai;
     BITMAP *lanzakunai2;
     BITMAP *lanzakunai3;
@@ -49,9 +69,21 @@ int main()
     walk1 = load_bitmap("walk1.bmp",NULL);
     walk2 = load_bitmap("walk2.bmp",NULL);
     walk3 = load_bitmap("walk3.bmp",NULL);
+    walk4 = load_bitmap("walk4.bmp",NULL);
+    walk5 = load_bitmap("walk5.bmp",NULL);
+    walk6 = load_bitmap("walk6.bmp",NULL);
     vwalk1 = load_bitmap("vwalk1.bmp",NULL);
     vwalk2 = load_bitmap("vwalk2.bmp",NULL);
     vwalk3 = load_bitmap("vwalk3.bmp",NULL);
+    vwalk4 = load_bitmap("vwalk4.bmp",NULL);
+    vwalk5 = load_bitmap("vwalk5.bmp",NULL);
+    vwalk6 = load_bitmap("vwalk6.bmp",NULL);
+    Agachado1 = load_bitmap("Agachado1.bmp",NULL);
+    Agachado2 = load_bitmap("Agachado2.bmp",NULL);
+    Agachado3 = load_bitmap("Agachado3.bmp",NULL);
+    vAgachado1 = load_bitmap("vAgachado1.bmp",NULL);
+    vAgachado2 = load_bitmap("vAgachado2.bmp",NULL);
+    vAgachado3 = load_bitmap("vAgachado3.bmp",NULL);
     jump1 = load_bitmap("jump1.bmp",NULL);
     jump2 = load_bitmap("jump2.bmp",NULL);
     shuriken = load_bitmap("shuriken.bmp",NULL);
@@ -72,15 +104,14 @@ int main()
     int y = 380; // Eje Y; Sí es positivo, baja; si es negativo, sube.//
     int x = 320; // Eje X
     int z;       // Eje Z, referente al arma.
-    //const int corx = 30; //Correr, Velocidad
-    //const int cory; //Correr, Velocidad
-    //float velx; //Velocidad X
-    //float vely; //Velocidad Y
     int p2y = 380;
     int p2x = 360;
     /*Ejes*/
 
-
+    /*Colisiones*/
+    x != p2x;
+    /*Colisiones*/
+    
     /*Variables Globales*/
     bool juego = true;
     bool frente = false;
@@ -96,15 +127,15 @@ int main()
     blit(buffer, screen , 0,0,0,0,640,480); //Buffer.
     blit(Fondo, buffer , 0,0,0,0,640,480);
     masked_blit(Piso, buffer ,0,0,0,0,640,480);
-    masked_blit(stand1 ,screen ,0,0,x,y,76,78);
-
+    draw_sprite(screen, stand1, x, y);
+   // masked_blit(stand1 ,screen ,0,0,x,y,76,78);
     /*Fondo*/
-
 
     /*CONTROLES*/
     while(juego){//(!  key[KEY_ESC]){
         blit(buffer, screen , 0,0,0,0,640,480);
-        masked_blit(stand1 ,screen ,0,0,x,y,76,78);
+        draw_sprite(screen, stand1, x, y);
+        //masked_blit(stand1 ,screen ,0,0,x,y,76,78);
 
         if (key[KEY_I]){ // Movimiento del lanzamiento del Kunai.
             blit(buffer, screen , 0,0,0,0,640,480);
@@ -124,82 +155,112 @@ int main()
 
         /*Tecla A*/
         else if(key[KEY_A]){ //Caminata hacia la Izquierda.
-            x -= 10;
+            x -= 20;
             blit(buffer, screen , 0,0,0,0,640,480);
             masked_blit(vwalk1 ,screen ,0,0,x,y,76,78);
             rest(100);
             if (key[KEY_A]){
                 blit(buffer, screen , 0,0,0,0,640,480);
-                x -= 30;
+                x -= 20;
                 masked_blit(vwalk2 ,screen ,0,0,x,y,76,78);
-                rest(100); 
+                rest(100);
                 if (key[KEY_A]){
-                        blit(buffer, screen , 0,0,0,0,640,480);
-                        x -= 30;
-                        masked_blit(vwalk2 ,screen ,0,0,x,y,76,78);
-                        rest(100);
-                          
+                    blit(buffer, screen , 0,0,0,0,640,480);
+                    x -= 20;
+                    masked_blit(vwalk3 ,screen ,0,0,x,y,76,78);
+                    rest(100);
                     if (key[KEY_A]){
+                        blit(buffer, screen , 0,0,0,0,640,480);
+                        x -= 20;
+                        masked_blit(vwalk4 ,screen ,0,0,x,y,76,78);
+                        rest(100);
+                        if (key[KEY_A]){
                             blit(buffer, screen , 0,0,0,0,640,480);
                             x -= 20;
-                            masked_blit(vwalk3 ,screen ,0,0,x,y,76,78);
+                            masked_blit(vwalk5 ,screen ,0,0,x,y,76,78);
                             rest(100);
-                    }    
-                }  
+                            if (key[KEY_A]){
+                                blit(buffer, screen , 0,0,0,0,640,480);
+                                x -= 20;
+                                masked_blit(vwalk6 ,screen ,0,0,x,y,76,78);
+                                rest(100);
+                            }
+                        }
+                    }
+                }
             }
-
-            
-
-            
-        }
+         }
 
         /*Tecla D*/
         else if(key[KEY_D]){ //Caminata hacia la Derecha.
-            x += 10;
+            x += 20;
             blit(buffer, screen , 0,0,0,0,640,480);
             masked_blit(walk1 ,screen ,0,0,x,y,76,78);
             rest(100);
-
-            blit(buffer, screen , 0,0,0,0,640,480);
-            x += 30;
-            masked_blit(walk2 ,screen ,0,0,x,y,76,78);
-            rest(100);
-
-            blit(buffer, screen , 0,0,0,0,640,480);
-            x += 20;
-            masked_blit(walk3 ,screen ,0,0,x,y,76,78);
-            rest(100);
-        }
+            if (key[KEY_D]){
+                blit(buffer, screen , 0,0,0,0,640,480);
+                x += 20;
+                masked_blit(walk2 ,screen ,0,0,x,y,76,78);
+                rest(100);
+                if (key[KEY_D]){
+                    blit(buffer, screen , 0,0,0,0,640,480);
+                     x += 20;
+                    masked_blit(walk3 ,screen ,0,0,x,y,76,78);
+                    rest(100);
+                    if (key[KEY_D]){
+                        blit(buffer, screen , 0,0,0,0,640,480);
+                        x += 20;
+                        masked_blit(walk4 ,screen ,0,0,x,y,76,78);
+                        rest(100);
+                        if (key[KEY_D]){
+                            blit(buffer, screen , 0,0,0,0,640,480);
+                            x += 20;
+                            masked_blit(walk5 ,screen ,0,0,x,y,76,78);
+                            rest(100);
+                            if (key[KEY_D]){
+                                blit(buffer, screen , 0,0,0,0,640,480);
+                                x += 20;
+                                masked_blit(walk6 ,screen ,0,0,x,y,76,78);
+                                rest(100);
+                            }
+                        }
+                    }
+                }
+            }
+         }
 
         /*Tecla W*/
         else if (key[KEY_W]){
-            y -= 75;
+            y -= 80;
             //ve= 0;
             blit(buffer, screen , 0,0,0,0,640,480);
             masked_blit(jump1 ,screen ,0,0,x,y,76,78);
             rest(240);
-
-            blit(buffer, screen , 0,0,0,0,640,480);
-            y +=75;
-            //vely += 100;
-            //velx = 0;
-            masked_blit(jump2 ,screen ,0,0,x,y,76,78);
-            rest(240);
+            if (y = 300){
+                blit(buffer, screen , 0,0,0,0,640,480);
+                y +=80;
+                masked_blit(jump2 ,screen ,0,0,x,y,76,78);
+                rest(240);
+            }    
         }
+            
 
         /*Tecla S*/
-        /*else if (key[KEY_S]){
-            blit(lanzakunai, screen, 0,0,x,y,76,78);
-            rest(140);
-
+        else if (key[KEY_S]){
             blit(buffer ,screen ,0,0,0,0,640,480);
-            blit(lanzakunai2, screen, 0,0,x,y,76,78);
-            rest(160);
-
-            blit(buffer ,screen ,0,0,0,0,640,480);
-            blit(lanzakunai3, screen, 0,0,x,y,76,78);
-            rest(180);
-        }*/
+            masked_blit(Agachado1, screen, 0,0,x,y,76,78);
+            rest(100);
+            if (key[KEY_S]){
+                blit(buffer ,screen ,0,0,0,0,640,480);
+                masked_blit(Agachado2, screen, 0,0,x,y,76,78);
+                rest(100);
+                if (key[KEY_S]){
+                    blit(buffer ,screen ,0,0,0,0,640,480);
+                    masked_blit(Agachado3, screen, 0,0,x,y,76,78);
+                    rest(100);
+                }
+            }
+        }
             /*Tecla J*/
         else if(key[KEY_J]){ //Cabezazo /*Combo 1*/
             blit(buffer, screen , 0,0,0,0,640,480);
@@ -229,6 +290,9 @@ int main()
                 arma1 = false;
             }
             rest(50);
+        }
+        if(key[KEY_ESC]){ //Se cierra el juego.
+            juego = false;
         }
 
     }
